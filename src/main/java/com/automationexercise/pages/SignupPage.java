@@ -1,5 +1,6 @@
 package com.automationexercise.pages;
 
+import com.automationexercise.data.UserData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,13 +44,13 @@ public class SignupPage extends BasePage {
 
 
 
-    public void enterAccountInformation(String password, String day, String month, String year) {
+    public void enterAccountInformation(UserData user) {
 
         wait.until(ExpectedConditions.elementToBeClickable(mrsTitle));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).sendKeys(password);
-     selectByVisibleText(dayDropdown, day);
-       selectByVisibleText(monthDropdown, month);
-      selectByVisibleText(yearDropdown, year);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput)).sendKeys(user.getPassword());
+     selectByVisibleText(dayDropdown, user.getDay());
+       selectByVisibleText(monthDropdown, user.getMonth());
+      selectByVisibleText(yearDropdown, user.getYear());
     }
 
     public void selectNewsletterAndOffers() {
@@ -57,20 +58,17 @@ public class SignupPage extends BasePage {
         selectCheckbox(offersCheckbox);
     }
 
-    public void enterAddressInformation(String firstName, String lastName, String company,
-                                        String address1, String address2, String country,
-                                        String state, String city, String zipcode,
-                                        String mobileNumber) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameInput)).sendKeys(firstName);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameInput)).sendKeys(lastName);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(companyInput)).sendKeys(company);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(address1Input)).sendKeys(address1);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(address2Input)).sendKeys(address2);
-        selectByVisibleText(countryDropdown, country);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(stateInput)).sendKeys(state);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cityInput)).sendKeys(city);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(zipcodeInput)).sendKeys(zipcode);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mobileNumberInput)).sendKeys(mobileNumber);
+    public void enterAddressInformation(UserData user) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameInput)).sendKeys(user.getFirstName());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameInput)).sendKeys(user.getLastName());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(companyInput)).sendKeys(user.getCompany());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(address1Input)).sendKeys(user.getAddress1());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(address2Input)).sendKeys(user.getAddress2());
+        selectByVisibleText(countryDropdown, user.getCountry());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(stateInput)).sendKeys(user.getState());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cityInput)).sendKeys(user.getCity());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(zipcodeInput)).sendKeys(user.getZipcode());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(mobileNumberInput)).sendKeys(user.getMobileNumber());
     }
 
     public void clickCreateAccountButton() {

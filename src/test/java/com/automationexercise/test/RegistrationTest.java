@@ -1,6 +1,7 @@
 package com.automationexercise.test;
 
 import com.automationexercise.base.BaseTest;
+import com.automationexercise.data.UserData;
 import com.automationexercise.pages.AccountCreatedPage;
 import com.automationexercise.pages.HomePage;
 import com.automationexercise.pages.LoginPage;
@@ -16,27 +17,42 @@ public class RegistrationTest extends BaseTest {
     LoginPage loginPage = new LoginPage(driver);
     SignupPage signupPage = new SignupPage(driver);
         AccountCreatedPage accountCreatedPage = new AccountCreatedPage(driver);
+        UserData user = new UserData();
 
-    String username = "User27";
-    String email = "user"+System.currentTimeMillis()+"@example.com";
+        user.setUserName("Irina Test");
+        user.setEmail("testuser" + System.currentTimeMillis() + "@example.com");
+        user.setPassword("Test123!");
+
+        user.setDay("15");
+        user.setMonth("May");
+        user.setYear("1995");
+        user.setFirstName("Irina");
+        user.setLastName("Tester");
+        user.setCompany("QA Test Company");
+        user.setAddress1("10 Test Street");
+        user.setAddress2("Apartment 2");
+        user.setCountry("Canada");
+        user.setState("Lincolnshire");
+        user.setCity("Bourne");
+        user.setZipcode("PE10 0AA");
+        user.setMobileNumber("07123456789");
+
 
     homePage.clickSignupLoginLink();
         Assert.assertTrue(
                 loginPage.isNewUserSignupHeadingVisible(),
                 "New User Signup heading should be visible");
 
-    loginPage.signUpNewUser(username, email);
+    loginPage.signUpNewUser(user.getUserName(), user.getEmail());
     Assert.assertTrue(
             signupPage.isAccountInformationHeadingVisible(),
             "Account Information heading should be visible"
     );
 
-    signupPage.enterAccountInformation("Password123", "21", "January", "2001");
+    signupPage.enterAccountInformation(user);
     signupPage.selectNewsletterAndOffers();
-    signupPage.enterAddressInformation("John", "Doe", "Example Inc.", "123 Main St",
-            "Apt 4B", "United States", "California", "Los Angeles",
-            "90001", "1234567890");
-  signupPage.clickCreateAccountButton();
+    signupPage.enterAddressInformation(user);
+    signupPage.clickCreateAccountButton();
     Assert.assertTrue(
             accountCreatedPage.isAccountCreatedHeadingDisplayed(),
             "Account Created heading should be visible"
