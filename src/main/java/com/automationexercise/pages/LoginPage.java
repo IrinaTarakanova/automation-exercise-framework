@@ -11,6 +11,13 @@ public class LoginPage extends BasePage {
     private By emailInput = By.xpath("//input[@data-qa='signup-email']");
     private By signupButton = By.cssSelector("[data-qa='signup-button']");
 
+    private By loginHeading =
+            By.xpath("//h2[text()='Login to your account']");
+    private By loginEmailInput = By.xpath("//input[@data-qa='login-email']");
+    private By loginPasswordInput = By.xpath("//input[@data-qa='login-password']");
+    private By loginButton = By.cssSelector("[data-qa='login-button']");
+
+
 
 
     public LoginPage(WebDriver driver) {
@@ -28,4 +35,16 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(emailInput)).sendKeys(email);
         wait.until(ExpectedConditions.elementToBeClickable(signupButton)).click();
     }
+
+    public boolean isLoginHeadingVisible() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(loginHeading)).isDisplayed();
+    }
+
+    public void loginToExistingAccount(String email, String password) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginEmailInput)).sendKeys(email);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginPasswordInput)).sendKeys(password);
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+    }
+
+
 }
